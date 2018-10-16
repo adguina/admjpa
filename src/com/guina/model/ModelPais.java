@@ -1,4 +1,3 @@
-
 package com.guina.model;
 
 import java.io.Serializable;
@@ -10,29 +9,41 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
 
 /**
  *
- * @author agnaldo
- * Implementa java been(Contrutor sem argumento,Serializable,metodos private)
+ * @author agnaldo Implementa java been(Contrutor sem
+ * argumento,Serializable,metodos private)
  */
 @Entity
 @Table(name = "tb001pais")
-public class ModelPais implements Serializable{
+public class ModelPais implements Serializable {
+
     @Id
     //gerar o id automaticamente
-    @SequenceGenerator(name = "seq_pais", sequenceName = "seq_pais_id",allocationSize = 1)
-    @GeneratedValue(generator = "seq_pais",strategy = GenerationType.SEQUENCE) 
+    @SequenceGenerator(name = "seq_pais", sequenceName = "seq_pais_id", allocationSize = 1)
+    @GeneratedValue(generator = "seq_pais", strategy = GenerationType.SEQUENCE)
     @Column(name = "id_pais", nullable = false)
     private Integer id_pais;
+    @Length(max = 50, message = "O nome nao pode ter mais que {max} caractertes")
+    @NotBlank(message = "O nome deve ser informado")
+    @NotNull(message = "O nome nao pode ser nulo")
     @Column(name = "nome_pais", nullable = false, length = 50)
     private String nome_pais;
+    @Length(max = 3, message = "O iso nao pode ter mais que {max} caractertes")
+    @NotBlank(message = "O iso deve ser informado")
+    @NotNull(message = "O iso nao pode ser nulo")
     @Column(name = "iso_pais", nullable = false, length = 3)
+
     private String iso_pais;
 
     public ModelPais() {
-        
+
     }
+
     /**
      * @return the id_pais
      */
@@ -99,8 +110,5 @@ public class ModelPais implements Serializable{
         }
         return true;
     }
-    
-    
-    
-    
+
 }
